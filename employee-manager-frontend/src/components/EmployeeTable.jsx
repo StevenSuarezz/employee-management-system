@@ -1,7 +1,14 @@
 import React, { useState } from "react"
+import { useEffect } from "react";
+import { getEmployees } from "../controller/EmployeeController";
 
-function EmployeeListComponent(props) {
+function EmployeeTable(props) {
     const [employees, setEmployees] = useState([]);
+    useEffect(() => {
+        getEmployees().then((res) => {
+            setEmployees(res.data);
+        });
+    })
     return (
         <div>
             <h2 className="text-center">Employees List</h2>
@@ -12,6 +19,7 @@ function EmployeeListComponent(props) {
                             <th>Employee First Name</th>
                             <th>Employee Last Name</th>
                             <th>Employee Email</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -29,4 +37,4 @@ function EmployeeListComponent(props) {
     );
 }
 
-export default EmployeeListComponent;
+export default EmployeeTable;
