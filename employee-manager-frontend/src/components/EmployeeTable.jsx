@@ -4,11 +4,13 @@ import { getEmployees } from "../controller/EmployeeController";
 
 function EmployeeTable(props) {
     const [employees, setEmployees] = useState([]);
+    
     useEffect(() => {
         getEmployees().then((res) => {
             setEmployees(res.data);
         });
-    })
+    }, [])
+
     return (
         <div>
             <h2 className="text-center">Employees List</h2>
