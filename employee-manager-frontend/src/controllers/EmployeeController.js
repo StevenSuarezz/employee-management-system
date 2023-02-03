@@ -6,4 +6,9 @@ function getEmployees() {
     return axios.get(API_BASE_URL)
 }
 
+function createEmployee(employee) {
+    return axios.post(API_BASE_URL, employee);
+}
+
 export { getEmployees };
+export { createEmployee }

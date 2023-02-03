@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { useEffect } from "react";
-import { getEmployees } from "../controller/EmployeeController";
+import { Link } from "react-router-dom";
+import { getEmployees } from "../controllers/EmployeeController";
 
 function EmployeeTable(props) {
     const [employees, setEmployees] = useState([]);
@@ -14,6 +15,9 @@ function EmployeeTable(props) {
     return (
         <div>
             <h2 className="text-center">Employees List</h2>
+            <Link to="/add-employee">
+                <button className="btn btn-primary">Add Employee</button>
+            </Link>
             <div className="row">
                 <table className="table table-striped table-bordered">
                     <thead>
