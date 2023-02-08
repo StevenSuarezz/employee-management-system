@@ -1,13 +1,29 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { createEmployee } from "../controllers/EmployeeController";
 import { createEmployeeModel } from "../models/EmployeeModel";
+import { getEmployeeById, updateEmployee } from "../controllers/EmployeeController";
 
-function EmployeeCreation() {
+function EmployeeForm() {
+    const { id } = useParams();
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
     const navigate = useNavigate();
+
+    useEffect(() => {
+
+        if(id == -1) return;
+
+        getEmployeeById(id).then((res) => {
+            const employee = createEmployeeModel(res.data);
+
+            setFirstName(employee.firstName);
+            setLastName(employee.lastName);
+            setEmail(employee.email);
+        });
+
+    }, [])
 
     const firstNameHandler = (event) => {
         setFirstName(event.target.value);
@@ -23,12 +39,18 @@ function EmployeeCreation() {
 
     const submitHandler = (e) => {
         e.preventDefault();
-        let employee = createEmployeeModel(firstName, lastName, email);
+        let employee = createEmployeeModel({id, firstName, lastName, email});
         console.log("Employee => " + JSON.stringify(employee));
 
-        createEmployee(employee).then(res => {
-            navigate("/employees");
-        })
+        if (id == -1) {
+            createEmployee(employee).then(res => {
+                navigate("/employees");
+            });
+        } else {
+            updateEmployee(employee).then(res => {
+                navigate("/employees");
+            });
+        }
     }
 
     return (
@@ -69,4 +91,4 @@ function EmployeeCreation() {
     )
 }
 
-export default EmployeeCreation;
+export default EmployeeForm;

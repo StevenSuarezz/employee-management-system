@@ -10,5 +10,15 @@ function createEmployee(employee) {
     return axios.post(API_BASE_URL, employee);
 }
 
+function getEmployeeById(id) {
+    return axios.get(`${API_BASE_URL}/${id}`);
+}
+
+function updateEmployee(employee) {
+    return axios.put(API_BASE_URL, employee);
+}
+
 export { getEmployees };
-export { createEmployee }
+export { createEmployee };
+export { getEmployeeById };
+export { updateEmployee };

@@ -1,8 +1,9 @@
-function createEmployeeModel(_firstName="", _lastName="", _email="") {
+function createEmployeeModel(data) {
     const employee = {
-        firstName: _firstName,
-        lastName: _lastName,
-        email: _email,
+        id: data.id,
+        firstName: data.firstName,
+        lastName: data.lastName,
+        email: data.email
     }
 
     return employee;

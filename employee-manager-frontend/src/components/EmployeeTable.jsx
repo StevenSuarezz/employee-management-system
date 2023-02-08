@@ -15,7 +15,7 @@ function EmployeeTable(props) {
     return (
         <div>
             <h2 className="text-center">Employees List</h2>
-            <Link to="/add-employee">
+            <Link to="/employee-form/-1">
                 <button className="btn btn-primary">Add Employee</button>
             </Link>
             <div className="row">
@@ -34,6 +34,9 @@ function EmployeeTable(props) {
                                 <td>{employee.firstName}</td>
                                 <td>{employee.lastName}</td>
                                 <td>{employee.email}</td>
+                                <td>
+                                    <Link to={`/employee-form/${employee.id}`}><button className="btn btn-info">Update</button></Link>
+                                </td>
                             </tr>)
                         }
                     </tbody>
