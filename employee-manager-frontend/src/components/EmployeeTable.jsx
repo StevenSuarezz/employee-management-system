@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { getEmployees } from "../controllers/EmployeeController";
+import { deleteEmployee, getEmployees } from "../controllers/EmployeeController";
 
 function EmployeeTable(props) {
     const [employees, setEmployees] = useState([]);
@@ -12,11 +12,17 @@ function EmployeeTable(props) {
         });
     }, [])
 
+    const deleteHandler = (id) => {
+        deleteEmployee(id).then(res => {
+            setEmployees(employees.filter(employee => employee.id != id));
+        });
+    }
+
     return (
         <div>
-            <h2 className="text-center">Employees List</h2>
+            <h2 className="text-center mt-3">Employees List</h2>
             <Link to="/employee-form/-1">
-                <button className="btn btn-primary">Add Employee</button>
+                <button className="btn btn-primary mb-3">Add Employee</button>
             </Link>
             <div className="row">
                 <table className="table table-striped table-bordered">
@@ -35,7 +41,9 @@ function EmployeeTable(props) {
                                 <td>{employee.lastName}</td>
                                 <td>{employee.email}</td>
                                 <td>
-                                    <Link to={`/employee-form/${employee.id}`}><button className="btn btn-info">Update</button></Link>
+                                    <Link to={`/employee-form/${employee.id}`}><button className="btn btn-primary">Update</button></Link>
+                                    <button className="mx-2 btn btn-danger" onClick={() => deleteHandler(employee.id)}>Delete</button>
+                                    <Link to={`/employee-view/${employee.id}`}><button className="btn btn-success">View</button></Link>
                                 </td>
                             </tr>)
                         }

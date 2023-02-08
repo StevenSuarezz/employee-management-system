@@ -18,7 +18,12 @@ function updateEmployee(employee) {
     return axios.put(API_BASE_URL, employee);
 }
 
+function deleteEmployee(id) {
+    return axios.delete(`${API_BASE_URL}/${id}`);
+}
+
 export { getEmployees };
 export { createEmployee };
 export { getEmployeeById };
 export { updateEmployee };
+export { deleteEmployee };

@@ -41,4 +41,9 @@ public class EmployeeController {
     public Employee createEmployee(@RequestBody Employee employee) {
         return employeeRepository.save(employee);
     }
+
+    @DeleteMapping("/employees/{id}")
+    public void deleteEmployee(@PathVariable Long id) {
+        employeeRepository.deleteById(id);
+    }
 }

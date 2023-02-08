@@ -5,6 +5,7 @@ import EmployeeTable from './components/EmployeeTable';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import EmployeeForm from './components/EmployeeForm';
+import EmployeeView from './components/EmployeeView';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
               <Route path="/" element={<EmployeeTable />}></Route>
               <Route path="/employees" element={<EmployeeTable />}></Route>
               <Route path="/employee-form/:id" element={<EmployeeForm />}></Route>
+              <Route path="/employee-view/:id" element={<EmployeeView />}></Route>
             </Routes>
           </div>
           <Footer />

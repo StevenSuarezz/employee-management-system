@@ -37,9 +37,17 @@ function EmployeeForm() {
         setEmail(event.target.value);
     }
 
+    const getTitle = () => {
+        if(id == -1) {
+            return <h3 className="text-center mt-2">Add Employee</h3>;
+        } else {
+            return <h3 className="text-center mt-2">Update Employee</h3>
+        }
+    }
+
     const submitHandler = (e) => {
         e.preventDefault();
-        let employee = createEmployeeModel({id, firstName, lastName, email});
+        const employee = createEmployeeModel({id, firstName, lastName, email});
         console.log("Employee => " + JSON.stringify(employee));
 
         if (id == -1) {
@@ -57,8 +65,8 @@ function EmployeeForm() {
         <div>
             <div className="container">
                 <div className="row">
-                    <div className="card col-md-6 offset-md-3 offset-md-3">
-                        <h3 className="text-center">Add Employee</h3>
+                    <div className="card col-md-6 offset-md-3 offset-md-3 mt-4">
+                        {getTitle()}
                         <div className="card-body">
                             <form onSubmit={submitHandler}>
                                 <div className="form-group">
